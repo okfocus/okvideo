@@ -1,5 +1,5 @@
 /*
- * OKType by OKFocus v1.0.0
+ * OKVideo by OKFocus v1.0.0
  * http://okfoc.us 
  *
  * Copyright 2012, OKFocus
@@ -11,19 +11,19 @@ var player, OKEvents;
 
 (function ($) {
     
-    $.okvid = function (options) {
+    $.okvideo = function (options) {
         var base = this;
 
         base.init = function () {
-            base.options = $.extend({}, $.okvid.options, options);
+            base.options = $.extend({}, $.okvideo.options, options);
             
-            $('body').append('<div id="player" style="position:fixed;left:0;top:0;overflow:hidden;z-index:-999;height:100%;width:100%;"></div>');
+            $('body').append('<div style="position:fixed;left:0;top:0;overflow:hidden;z-index:-998;height:100%;width:100%;"></div><div id="player" style="position:fixed;left:0;top:0;overflow:hidden;z-index:-999;height:100%;width:100%;"></div>');
             
             base.setOptions();
 
-            if (base.options.source.provider === 'youtube'){
+            if (base.options.source.provider === 'youtube') {
                 base.loadYoutubeAPI();
-            } else if (base.options.source.provider === 'vimeo'){
+            } else if (base.options.source.provider === 'vimeo') {
                 base.loadVimeoAPI();
             }
         };
@@ -39,21 +39,35 @@ var player, OKEvents;
 
         base.loadVimeoAPI = function() {
             $('#player').replaceWith(function() {
-                return '<iframe src="http://player.vimeo.com/video/' + base.options.source.id + '?api=1" frameborder="0" style="' + $(this).attr('style') + '" id="' + $(this).attr('id') + '"></iframe>';
+                return '</div><iframe src="http://player.vimeo.com/video/' + base.options.source.id + '?api=1&js_api=1&title=0&byline=0&portrait=0&playbar=0&autoplay=1&loop=' + base.options.loop + '&player_id=player" frameborder="0" style="' + $(this).attr('style') + '" id="' + $(this).attr('id') + '"></iframe>';
             });
-            base.insertJS('https://raw.github.com/gist/2504066/648698df42b2a093e46b0fdb2e94a7ff8e2bad6a/froogaloop.js', function(){ vimeo() });
+
+            base.insertJS('http://a.vimeocdn.com/js/froogaloop2.min.js', function(){ 
+                vimeoPlayerReady() 
+            });
         };
 
         base.insertJS = function(src, callback){
             var tag = document.createElement('script');
+
+            if (callback){
+                if (tag.readyState){  //IE
+                    tag.onreadystatechange = function(){
+                        if (tag.readyState == "loaded" ||
+                            tag.readyState == "complete"){
+                            tag.onreadystatechange = null;
+                            callback();
+                        }
+                    };
+                } else {
+                    tag.onload = function() {
+                        callback();
+                    }
+                }
+            }
             tag.src = src;
             var firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-            if (typeof callback === 'function') {
-                tag.onload = function() {
-                    callback();
-                }
-            }
         };
 
         base.determineProvider = function () {
@@ -61,7 +75,7 @@ var player, OKEvents;
                 return base.parseVideoURL(base.options.source);
             } else if (/[A-Za-z0-9_]+/.test(base.options.source)) {
                 var id = base.options.source.match(/[A-Za-z0-9_]+/);
-                if (!id.length === 11) throw "not youtube but thought it was for a sec";
+                if (id[0].length != 11) throw "not youtube but thought it was for a sec";
                 return { 'provider' : 'youtube', 'id' : id };
             } else {
                 for (var i = 0; i < base.options.source.length; i++) {
@@ -77,7 +91,7 @@ var player, OKEvents;
         base.parseVideoURL = function(url) {
 
             var retVal = {};
-            var matches;           
+            var matches;
     
             function getParm(url, param) {
                 var re = new RegExp("(\\?|&)" + param + "\\=([^&]*)(&|$)");
@@ -97,37 +111,32 @@ var player, OKEvents;
                 retVal.id = matches[1];
             }
             return(retVal);
-        };        
-        
+        };
+
         base.init();
     };
-    
-    $.okvid.options = {
+
+    $.okvideo.options = {
         source: null,
-        autohide: '1',
-        autoplay: '1',
-        keyControls: '1',
-        captions: '0',
-        annotations: 3,
+        disableKeyControl: 1,
+        captions: 0,
         loop: 1
     };
 
-    $.fn.okvid = function (options) {
+    $.fn.okvideo = function (options) {
         return this.each(function () {
-            (new $.okvid(options));
+            (new $.okvideo(options));
         });
     };
 
 })(jQuery);
 
-function vimeo() {
-    var vimeo = $f(document.getElementById('player'));
-    vimeo.addEvent('ready', function() {
-        console.log(this);
-//        vimeo.setVolume(0);
-        vimeo.play();
-  //      vimeo.setLoop(true);
-    }); 
+function vimeoPlayerReady() {   
+
+    var vimeoPlayers = document.querySelectorAll('iframe');
+    for (var i = 0, length = vimeoPlayers.length; i < length; i++) {        
+        $f(vimeoPlayers[i]).addEvent('ready', OKEvents.v.ready);
+    }
 }
 
 function onYouTubePlayerAPIReady() {
@@ -135,14 +144,14 @@ function onYouTubePlayerAPIReady() {
     player = new YT.Player('player', {
         videoId: options.source.id,
         playerVars: {
-            'autohide': options.autohide,
-            'autoplay': options.autoplay,
+            'autohide': 1,
+            'autoplay': 1,
             'disablekb': options.keyControls,
             'cc_load_policy': options.captions,
             'controls': 0,
             'enablejsapi': 1,
             'fs': 0,
-            'iv_load_policy': options.annotations,
+            'iv_load_policy': 1,
             'loop': options.loop,
             'showinfo': 0,
             'rel': 0,            
@@ -160,12 +169,13 @@ OKEvents = {
         ready: function(event){
             event.target.mute();
         },
-        stateChange: function(event){
-            // buffering notice
-        },
         error: function(event){
-            throw event;    
+            throw event;
+        }
+    },
+    v: {
+        ready: function(player_id){
+            $f(player_id).api('api_setVolume', 0);
         }
     }
 };
-
