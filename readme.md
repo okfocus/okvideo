@@ -1,6 +1,6 @@
 # OKVideo
 
-OKVideo is a jQuery plugin that allows for YouTube or Vimeo videos to be used as full-scren backgrounds on webpages. OKVideo aims to be customizable while making some basic decisions about how the plugin should control video.
+OKVideo is a jQuery plugin that allows for YouTube or Vimeo videos to be used as full-screen backgrounds on webpages. OKVideo aims to be customizable while making some basic decisions about how the plugin should control video.
 
 
 ## Usage
