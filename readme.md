@@ -6,7 +6,7 @@ OKVideo uses the new YouTube IFrame API which does not require any Flash objects
 
 ## Usage
 
-After including jQuery and the OKVideo plugin, instantiate OKVideo like so :
+After including jQuery and the OKVideo plugin, instantiate OKVideo like so:
 
 ``` js
 
@@ -16,15 +16,26 @@ $(function(){
 
 ```
 
-Alternatively, OKVideo conveniently will accept and parse full urls from YouTube or Vimeo:
+OKVideo conveniently will accept and parse full urls from YouTube or Vimeo:
 
 ``` js
 
 $(function(){
-  $.okvideo({ source: '[:url]' }) // [:url] refers to a YouTube or Vimeo URL
+  $.okvideo({ source: '[:url]', loop: 0 }) // [:url] refers to a YouTube or Vimeo URL
 }
 
 ```
+
+You can also simply pass an id or url if no other options are desired:
+
+``` js
+
+$(function(){
+  $.okvideo('[:url]') // [:url] refers to a YouTube or Vimeo URL
+}
+
+```
+
 
 ## Options
 
@@ -36,24 +47,24 @@ $(function(){
 	  <th>default</th>
 	</tr>
     <tr>
-      <td>source</td>
-	  <td>an id or url from vimeo or youtube</td>
-	  <td>null</td>
+     <td>source</td>
+	   <td>an id or url from vimeo or youtube</td>
+	   <td>null</td>
 	</tr>
     <tr>
       <td>disablekeyControl</td>
-	  <td>enable or disable key control (youtube videos only)</td>
-	  <td>boolean: 0 or 1</td>
+	   <td>enable or disable key control (youtube videos only)</td>
+	   <td>1</td>
 	</tr>
     <tr>
       <td>captions</td>
       <td>enable or disable captions (youtube videos only)</td>
-	  <td>boolean: 0 or 1</td>
+	   <td>0</td>
 	</tr>
     <tr>
       <td>loop</td>
-	  <td>loop the video</td>
-	  <td>boolean: 0 or 1</td>
+  	  <td>loop the video</td>
+	    <td>1</td>
 	</tr>
   </tbody>
 </table>
