@@ -12,12 +12,15 @@ var player, OKEvents;
 (function ($) {
     
     $.okvideo = function (options) {
+
+        if (typeof options !== 'object') options = { 'source' : options };
+
         var base = this;
 
         base.init = function () {
             base.options = $.extend({}, $.okvideo.options, options);
             
-            $('body').append('<div style="position:fixed;left:0;top:0;overflow:hidden;z-index:-998;height:100%;width:100%;"></div><div id="player" style="position:fixed;left:0;top:0;overflow:hidden;z-index:-999;height:100%;width:100%;"></div>');
+            $('body').append('<div style="position:fixed;left:0;top:0;overflow:hidden;z-index:-998;height:100%;width:100%;" id="okplayer-mask"></div><div id="okplayer" style="position:fixed;left:0;top:0;overflow:hidden;z-index:-999;height:100%;width:100%;"></div>');
             
             base.setOptions();
 
@@ -38,8 +41,8 @@ var player, OKEvents;
         };
 
         base.loadVimeoAPI = function() {
-            $('#player').replaceWith(function() {
-                return '</div><iframe src="http://player.vimeo.com/video/' + base.options.source.id + '?api=1&js_api=1&title=0&byline=0&portrait=0&playbar=0&autoplay=1&loop=' + base.options.loop + '&player_id=player" frameborder="0" style="' + $(this).attr('style') + '" id="' + $(this).attr('id') + '"></iframe>';
+            $('#okplayer').replaceWith(function() {
+                return '</div><iframe src="http://player.vimeo.com/video/' + base.options.source.id + '?api=1&js_api=1&title=0&byline=0&portrait=0&playbar=0&autoplay=1&loop=' + base.options.loop + '&player_id=okplayer" frameborder="0" style="' + $(this).attr('style') + '" id="' + $(this).attr('id') + '"></iframe>';
             });
 
             base.insertJS('http://a.vimeocdn.com/js/froogaloop2.min.js', function(){ 
@@ -74,17 +77,17 @@ var player, OKEvents;
             if (/youtube.com/.test(base.options.source) || /vimeo.com/.test(base.options.source)) {
                 return base.parseVideoURL(base.options.source);
             } else if (/[A-Za-z0-9_]+/.test(base.options.source)) {
-                var id = base.options.source.match(/[A-Za-z0-9_]+/);
-                if (id[0].length != 11) throw "not youtube but thought it was for a sec";
-                return { 'provider' : 'youtube', 'id' : id };
-            } else {
-                for (var i = 0; i < base.options.source.length; i++) {
-                    if (typeof base.options.source[i] != 'number') {
-                        throw 'not vimeo but thought it was for a sec'
-                        break;
+                var id = new String(base.options.source.match(/[A-Za-z0-9_]+/));
+                if (id.length == 11) {
+                    return { 'provider' : 'youtube', 'id' : id };                
+                } else {
+                    for (var i = 0; i < base.options.source.length; i++) {
+                        if (typeof parseInt(base.options.source[i]) != 'number') {
+                            throw 'not vimeo but thought it was for a sec'
+                        }
                     }
+                    return { 'provider' : 'vimeo', 'id' : base.options.source };
                 }
-                return { 'provider' : 'vimeo', 'id' : base.options.source };
             }
         };
 
@@ -141,7 +144,7 @@ function vimeoPlayerReady() {
 
 function onYouTubePlayerAPIReady() {
     var options = $(window).data('okoptions');
-    player = new YT.Player('player', {
+    player = new YT.Player('okplayer', {
         videoId: options.source.id,
         playerVars: {
             'autohide': 1,
