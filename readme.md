@@ -66,5 +66,10 @@ $(function(){
   	  <td>loop the video</td>
 	    <td>1</td>
 	</tr>
-  </tbody>
+    <tr>
+      <td>mute/td>
+  	  <td>mute the video</td>
+	  <td>null</td>
+	</tr>
+</tbody>
 </table>

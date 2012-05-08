@@ -1,5 +1,5 @@
 /*
- * OKVideo by OKFocus v1.0.0
+ * OKVideo by OKFocus v1.1
  * http://okfoc.us 
  *
  * Copyright 2012, OKFocus
@@ -123,7 +123,8 @@ var player, OKEvents;
         source: null,
         disableKeyControl: 1,
         captions: 0,
-        loop: 1
+        loop: 1,
+        mute: null
     };
 
     $.fn.okvideo = function (options) {
@@ -170,7 +171,7 @@ function onYouTubePlayerAPIReady() {
 OKEvents = {
     yt: {
         ready: function(event){
-            event.target.mute();
+            if (options.mute) event.target.mute();
         },
         error: function(event){
             throw event;
@@ -178,7 +179,7 @@ OKEvents = {
     },
     v: {
         ready: function(player_id){
-            $f(player_id).api('api_setVolume', 0);
+            if (options.mute) $f(player_id).api('api_setVolume', 0);
         }
     }
 };
