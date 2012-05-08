@@ -67,7 +67,7 @@ $(function(){
 	    <td>1</td>
 	</tr>
     <tr>
-      <td>mute/td>
+      <td>mute</td>
   	  <td>mute the video</td>
 	  <td>null</td>
 	</tr>
