@@ -67,65 +67,77 @@
   </style>
 </head>
 <body>
-<div id="container">
-  <div id="header">
-    <a href="http://okfoc.us"><header>
-      <img src="spookylogo.png">
-    </header></a>
-    <hr>
-
-</div>
-  <ul id="sidebar">
-  </ul>
-  <div id="content">
-    <h2>OKFocus Video</h2>
-    <p>
-      OKFocus video is a JQuery plugin that turns videos on YouTube or Vimeo into beautiful full-screen backgrounds, like the one on this page from <a href="http://vimeo.com/17206140">Gatekeeper</a>.
-    </p>
-
-    <p>
-      Using OKVideo is stupid simple. Just add <a href="https://github.com/okfocus/okvideo/zipball/master">the script</a> and use the following code :
-    </p>
-    <pre>
-$(function(){
-   $.okvideo({ source: 'YOUR AWESOME YOUTUBE OR VIMEO LINK HERE' }) 
-});
-</pre>
-
-    <div id="example1">
+  <div id="container">
+    <div id="header">
+      <a href="http://okfoc.us"><header>
+          <img src="spookylogo.png">
+        </header></a>
+      <hr>
     </div>
-    <p>
-  Additional params you can pass are as follow :
-    </p>
-    <pre>
-		<table>
-		<tbody><tr>
-		<th>option</th>
-		      <th>description</th>
-		      <th>default</th>
-		    </tr>
-		<tr>
-		<td>source</td>
-		       <td>an id or url from vimeo or youtube</td>
-		       <td>null</td>
-		    </tr>
-		<tr>
-		<td>disablekeyControl</td>
-		       <td>enable or disable key control (youtube videos only)</td>
-		       <td>1</td>
-		    </tr>
-		<tr>
-		<td>captions</td>
-		      <td>enable or disable captions (youtube videos only)</td>
-		       <td>0</td>
-		    </tr>
-		<tr>
-		<td>loop</td>
-		      <td>loop the video</td>
-		        <td>1</td>
-		    </tr>
-		</tbody></table></pre>
-'Checkout' the <a href="https://github.com/okfocus/okvideo">GitHub repo</a> for this, also checkout our <a href="http://okfoc.us/#labs">other awesome codez!
-</div>
+    <ul id="sidebar">
+    </ul>
+    <div id="content">
+      <h2>OKFocus Video</h2>
+      <p>
+        OKFocus video is a JQuery plugin that turns videos on YouTube or Vimeo into beautiful full-screen backgrounds, like the one on this page from <a href="http://vimeo.com/17206140">Gatekeeper</a>.
+      </p>
+
+      <p>
+        Using OKVideo is stupid simple. Just add <a href="https://github.com/okfocus/okvideo/zipball/master">the script</a> and use the following code :
+      </p>
+      <pre>
+        $(function(){
+        $.okvideo({ source: 'YOUR AWESOME YOUTUBE OR VIMEO LINK HERE' }) 
+        });
+      </pre>
+
+      <div id="example1">
+      </div>
+      <p>
+        Additional params you can pass are as follow :
+      </p>
+      <pre>
+        <table>
+          <tbody>
+            <tr>
+              <th>option</th>
+	            <th>description</th>
+	            <th>default</th>
+	          </tr>
+            <tr>
+              <td>source</td>
+	            <td>an id or url from vimeo or youtube</td>
+	            <td>null (required)</td>
+	          </tr>
+            <tr>
+              <td>disablekeyControl</td>
+	            <td>enable or disable key control (youtube videos only)</td>
+	            <td>true</td>
+	          </tr>
+            <tr>
+              <td>captions</td>
+              <td>enable or disable captions (youtube videos only)</td>
+              <td>false</td>
+	          </tr>
+            <tr>
+              <td>loop</td>
+  	          <td>loop the video</td>
+              <td>true</td>
+	          </tr>
+            <tr>
+              <td>high def</td>
+  	          <td>control hd playback (youtube videos only)</td>
+	            <td>false</td>
+	          </tr>
+            <tr>
+              <td>volume</td>
+  	          <td>control the volume with an integer from 0 - 10</td>
+	            <td>0</td>
+	          </tr>
+          </tbody>
+        </table>
+      </pre>
+      'Checkout' the <a href="https://github.com/okfocus/okvideo">GitHub repo</a> for this, also checkout our <a href="http://okfoc.us/#labs">other awesome codez!
+    </div>
 </body>
 </html>
