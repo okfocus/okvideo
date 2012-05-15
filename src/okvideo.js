@@ -7,7 +7,7 @@
  *
  */
 
-var player, OKEvents;
+var player, OKEvents, options, fakeMouseOut;
 
 (function ($) {
     
@@ -32,6 +32,10 @@ var player, OKEvents;
         };
         
         base.setOptions = function () {
+            for (var key in this.options){                
+                if (this.options[key] === true) this.options[key] = 1;
+            }            
+            
             base.options.source = base.determineProvider();
             $(window).data('okoptions', base.options);
         };
@@ -42,11 +46,11 @@ var player, OKEvents;
 
         base.loadVimeoAPI = function() {
             $('#okplayer').replaceWith(function() {
-                return '</div><iframe src="http://player.vimeo.com/video/' + base.options.source.id + '?api=1&js_api=1&title=0&byline=0&portrait=0&playbar=0&autoplay=1&loop=' + base.options.loop + '&player_id=okplayer" frameborder="0" style="' + $(this).attr('style') + '" id="' + $(this).attr('id') + '"></iframe>';
+                return '<iframe src="http://player.vimeo.com/video/' + base.options.source.id + '?api=1&js_api=1&title=0&byline=0&portrait=0&playbar=0&loop=' + base.options.loop + '&player_id=okplayer" frameborder="0" style="' + $(this).attr('style') + 'visibility:hidden;background-color:black;" id="' + $(this).attr('id') + '"></iframe>';
             });
 
             base.insertJS('http://a.vimeocdn.com/js/froogaloop2.min.js', function(){ 
-                vimeoPlayerReady() 
+                vimeoPlayerReady(); 
             });
         };
 
@@ -112,6 +116,8 @@ var player, OKEvents;
             } else if (matches = url.match(/vimeo.com\/(\d+)/)) {
                 retVal.provider = "vimeo";
                 retVal.id = matches[1];
+            } else {
+                throw "OKVideo: You have not entered a valid url. Please enter a URL from Vimeo or Youtube." 
             }
             return(retVal);
         };
@@ -124,7 +130,8 @@ var player, OKEvents;
         disableKeyControl: 1,
         captions: 0,
         loop: 1,
-        mute: null
+        hd: 1,
+        volume: 0
     };
 
     $.fn.okvideo = function (options) {
@@ -135,16 +142,28 @@ var player, OKEvents;
 
 })(jQuery);
 
-function vimeoPlayerReady() {   
+function vimeoPlayerReady() {
+    options = $(window).data('okoptions');
 
-    var vimeoPlayers = document.querySelectorAll('iframe');
-    for (var i = 0, length = vimeoPlayers.length; i < length; i++) {        
-        $f(vimeoPlayers[i]).addEvent('ready', OKEvents.v.ready);
-    }
+    var iframe = $('#okplayer')[0];
+    player = $f(iframe);
+    
+    // hide player until Vimeo hides controls...
+    window.setTimeout($('#okplayer').css('visibility', 'visible'), 2000);
+    
+    player.addEvent('ready', function () {
+        player.api('play');
+        if ('ontouchstart' in window.touchStart) {
+            // mobile devices cannot listen for play event
+            OKEvents.v.onPlay();
+        } else {
+            player.addEvent('play', OKEvents.v.onPlay());
+        }
+    });
 }
 
 function onYouTubePlayerAPIReady() {
-    var options = $(window).data('okoptions');
+    options = $(window).data('okoptions');
     player = new YT.Player('okplayer', {
         videoId: options.source.id,
         playerVars: {
@@ -159,7 +178,8 @@ function onYouTubePlayerAPIReady() {
             'loop': options.loop,
             'showinfo': 0,
             'rel': 0,            
-            'wmode': 'opaque'
+            'wmode': 'opaque',
+            'hd': options.hd
         },
         events: {
             'onReady': OKEvents.yt.ready,
@@ -171,15 +191,15 @@ function onYouTubePlayerAPIReady() {
 OKEvents = {
     yt: {
         ready: function(event){
-            if (options.mute) event.target.mute();
+            event.target.setVolume(options.volume);
         },
         error: function(event){
             throw event;
         }
     },
     v: {
-        ready: function(player_id){
-            if (options.mute) $f(player_id).api('api_setVolume', 0);
+        onPlay: function(){            
+            player.api('api_setVolume', options.volume);
         }
     }
 };
