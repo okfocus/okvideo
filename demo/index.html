@@ -7,7 +7,7 @@
   <script src='../src/okvideo.js'></script>
   <script>
     $(function(){
-        $.okvideo({ source: 'http://www.youtube.com/watch?v=5vhhz8CWP6k', loop: true, mute: true }) 
+        $.okvideo({ source: 'http://www.youtube.com/watch?v=xdzAKHuYGoU', volume: 0, hd:true, adproof: true }) 
     });
   </script>
   <style type="text/css">
@@ -79,7 +79,7 @@
     <div id="content">
       <h2>OKFocus Video</h2>
       <p>
-        OKFocus video is a JQuery plugin that turns videos on YouTube or Vimeo into beautiful full-screen backgrounds, like the one on this page from <a href="http://vimeo.com/17206140">Gatekeeper</a>.
+        OKFocus video is a JQuery plugin that turns videos on YouTube or Vimeo into beautiful full-screen backgrounds, like the one on this page from <a href="http://www.youtube.com/watch?v=xdzAKHuYGoU">Gatekeeper</a>.
       </p>
 
       <p>
@@ -87,7 +87,7 @@
       </p>
       <pre>
         $(function(){
-        $.okvideo({ source: 'YOUR AWESOME YOUTUBE OR VIMEO LINK HERE' }) 
+          $.okvideo({ source: 'YOUR AWESOME YOUTUBE OR VIMEO LINK HERE' }) 
         });
       </pre>
 
@@ -131,8 +131,13 @@
 	          </tr>
             <tr>
               <td>volume</td>
-  	          <td>control the volume with an integer from 0 - 10</td>
+  	          <td>control the volume with an integer from 0 - 100</td>
 	            <td>0</td>
+	          </tr>
+            <tr>
+              <td>adproof</td>
+  	          <td>scale the youtube player larger than the browser<br/>to obscure youtube ads</td>
+	            <td>false</td>
 	          </tr>
           </tbody>
         </table>

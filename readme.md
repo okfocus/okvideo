@@ -86,8 +86,13 @@ $(function(){
 	</tr>
     <tr>
       <td>volume</td>
-  	  <td>control the volume with an integer from 0 - 10</td>
+  	  <td>control the volume with an integer from 0 - 100</td>
 	  <td>0</td>
+	</tr>
+    <tr>
+      <td>adproof</td>
+  	  <td>scale the youtube player larger than the browser<br/>to obscure youtube ads</td>
+	  <td>false</td>
 	</tr>
 </tbody>
 </table>
