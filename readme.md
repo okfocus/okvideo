@@ -1,6 +1,6 @@
 # OKVideo
 
-OKVideo is a jQuery plugin that allows for YouTube or Vimeo videos to be used as full-screen backgrounds on webpages. OKVideo aims to be customizable while making some basic decisions about how the plugin should control video.
+OKVideo is a jQuery plugin that allows for YouTube or Vimeo videos to be used as full-screen backgrounds on webpages. OKVideo aims to be customizable while making some basic decisions about how the plugin should control video. When using OKVideo, all videos will be served from Vimeo or YouTube based on a number of variables like browser, device, bandwidth, etc.
 
 OKVideo uses the new YouTube IFrame API which does not require any Flash objects to be present on your website. This means that mobile devices will play video served by OKVideo. Content from Vimeo is served in a similar manner, although sometimes their videos will still be served in Flash.
 
@@ -21,7 +21,21 @@ OKVideo conveniently will accept and parse full urls from YouTube or Vimeo:
 ``` js
 
 $(function(){
-  $.okvideo({ source: '[:url]', loop: 0 }) // [:url] refers to a YouTube or Vimeo URL
+  $.okvideo({ source: '[:url]' }) // [:url] refers to a YouTube or Vimeo URL
+}
+
+```
+
+OKVideo accepts a number of options. The below will embed a high definition video from YouTube with the audio set to 50%:
+
+``` js
+
+$(function(){
+  $.okvideo({ 
+      source: '[:url]',
+      volume: 5,
+      hd: true 
+  });
 }
 
 ```
@@ -36,7 +50,6 @@ $(function(){
 
 ```
 
-
 ## Options
 
 <table>
@@ -49,22 +62,41 @@ $(function(){
     <tr>
      <td>source</td>
 	   <td>an id or url from vimeo or youtube</td>
-	   <td>null</td>
+	   <td>null (required)</td>
 	</tr>
     <tr>
       <td>disablekeyControl</td>
 	   <td>enable or disable key control (youtube videos only)</td>
-	   <td>1</td>
+	   <td>true</td>
 	</tr>
     <tr>
       <td>captions</td>
       <td>enable or disable captions (youtube videos only)</td>
-	   <td>0</td>
+      <td>false</td>
 	</tr>
     <tr>
       <td>loop</td>
   	  <td>loop the video</td>
-	    <td>1</td>
+      <td>true</td>
 	</tr>
-  </tbody>
+    <tr>
+      <td>high def</td>
+  	  <td>control hd playback (youtube videos only)</td>
+	  <td>false</td>
+	</tr>
+    <tr>
+      <td>volume</td>
+  	  <td>control the volume with an integer from 0 - 100</td>
+	  <td>0</td>
+	</tr>
+    <tr>
+      <td>adproof</td>
+  	  <td>scale the youtube player larger than the browser<br/>to obscure youtube ads</td>
+	  <td>false</td>
+	</tr>
+</tbody>
 </table>
+
+### Tests
+
+OKFocus tests with Jasmine. Once you've cloned the repo run `bundle` and then `rake jasmine` to test the source.

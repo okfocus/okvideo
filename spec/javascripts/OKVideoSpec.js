@@ -34,7 +34,6 @@ describe('okvideo', function() {
             $.okvideo({ source: '41091645' });
             waits(2000);
             runs(function(){
-                console.log($('#okplayer').attr('src'));
                 expect($('#okplayer').attr('src').split('.')[1]).toEqual('vimeo');
             });
 
@@ -52,7 +51,6 @@ describe('okvideo', function() {
             $.okvideo('41091645');
             waits(2000);
             runs(function(){
-                console.log($('#okplayer'));
                 expect($('#okplayer').attr('src').split('.')[1]).toEqual('vimeo');
             });
         });
