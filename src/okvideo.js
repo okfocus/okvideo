@@ -184,6 +184,7 @@ function onYouTubePlayerAPIReady() {
         },
         events: {
             'onReady': OKEvents.yt.ready,
+            'onStateChange': OKEvents.yt.onStateChange,
             'onError': OKEvents.yt.error
         }
     });
@@ -194,6 +195,9 @@ OKEvents = {
         ready: function(event){
             event.target.setVolume(options.volume);
             event.target.playVideo();
+        },
+        onStateChange: function(event){
+            if (event.data === 0 && options.loop) event.target.playVideo();
         },
         error: function(event){
             throw event;
