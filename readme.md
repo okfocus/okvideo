@@ -4,6 +4,8 @@ OKVideo is a jQuery plugin that allows for YouTube or Vimeo videos to be used as
 
 OKVideo uses the new YouTube IFrame API which does not require any Flash objects to be present on your website. This means that mobile devices will play video served by OKVideo. Content from Vimeo is served in a similar manner, although sometimes their videos will still be served in Flash.
 
+Tested and working in Safari 5.1+, Chrome, Firefox 3.6+, IE 8+. 
+
 ## Usage
 
 After including jQuery and the OKVideo plugin, instantiate OKVideo like so:
