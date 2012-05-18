@@ -1,5 +1,5 @@
 /*
- * OKVideo by OKFocus v1.5
+ * OKVideo by OKFocus v1.5.1
  * http://okfoc.us 
  *
  * Copyright 2012, OKFocus
@@ -130,7 +130,13 @@ var player, OKEvents, options;
         loop: 1,
         hd: 1,
         volume: 0,
-        adproof: false
+        adproof: false,
+        unstarted: null,
+        onFinished: null,
+        onPlay: null,
+        onPause: null,
+        buffering: null,
+        cued: null
     };
 
     $.fn.okvideo = function (options) {
