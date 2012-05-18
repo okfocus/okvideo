@@ -5,9 +5,20 @@
   <meta charset='utf-8'>
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js'></script>
   <script src='../src/okvideo.js'></script>
-  <script>
+  <script type="text/javascript">
     $(function(){
-        $.okvideo({ source: 'http://www.youtube.com/watch?v=V5TZ_u_MNvo', volume: 0, hd:true, adproof: true }) 
+        $.okvideo({ source: 'http://www.youtube.com/watch?v=V5TZ_u_MNvo', 
+                    volume: 0, 
+                    loop: true,
+                    hd:true, 
+                    adproof: true,
+                    onFinished: function() { console.log('finished') },
+                    unstarted: function() { console.log('unstarted') },
+                    onPlay: function() { console.log('onplay') },
+                    onPause: function() { console.log('pause') },
+                    buffering: function() { console.log('buffering') },
+                    cued: function() { console.log('cued') },
+                 });
     });
   </script>
   <style type="text/css">

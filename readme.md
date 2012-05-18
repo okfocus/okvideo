@@ -28,7 +28,7 @@ $(function(){
 
 ```
 
-OKVideo accepts a number of options. The below will embed a high definition video from YouTube with the audio set to 50%:
+OKVideo accepts a number of options. The below will embed a high definition video from YouTube with the audio set to 50% and log something to the console once the video has completed:
 
 ``` js
 
@@ -36,7 +36,10 @@ $(function(){
   $.okvideo({ 
       source: '[:url]',
       volume: 5,
-      hd: true 
+      hd: true,
+      onFinished: function(){ 
+          console.log('finished video!')
+      }
   });
 }
 
@@ -51,6 +54,10 @@ $(function(){
 }
 
 ```
+
+## YouTube API Access
+
+OKVideo gives you access to all of the YouTube player events. You can listen for all of the available player states: unstarted, ended, playing, paused, buffering, and cued.  To listen for them simply pass OKVideo a function to the corresponding option noted below.
 
 ## Options
 
@@ -92,9 +99,34 @@ $(function(){
 	  <td>0</td>
 	</tr>
     <tr>
-      <td>adproof</td>
-  	  <td>scale the youtube player larger than the browser<br/>to obscure youtube ads</td>
-	  <td>false</td>
+      <td>onFinished</td>
+  	  <td>listen for the "finished" event (must be a function)</td>
+	  <td>null</td>
+	</tr>
+    <tr>
+      <td>unstarted</td>
+  	  <td>listen for the "unstarted" event (must be a function)</td>
+	  <td>null</td>
+	</tr>
+    <tr>
+      <td>onPlay</td>
+  	  <td>listen for the "play" event (must be a function)</td>
+	  <td>null</td>
+	</tr>
+    <tr>
+      <td>onPause</td>
+  	  <td>listen for the "pause" event (must be a function)</td>
+	  <td>null</td>
+	</tr>
+    <tr>
+      <td>buffering</td>
+  	  <td>listen for the "buffering" event (must be a function)</td>
+	  <td>null</td>
+	</tr>
+    <tr>
+      <td>cued</td>
+  	  <td>listen for the "cued" event (must be a function)</td>
+	  <td>null</td>
 	</tr>
 </tbody>
 </table>

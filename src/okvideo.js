@@ -1,5 +1,5 @@
 /*
- * OKVideo by OKFocus v1.4
+ * OKVideo by OKFocus v1.5
  * http://okfoc.us 
  *
  * Copyright 2012, OKFocus
@@ -197,7 +197,30 @@ OKEvents = {
             event.target.playVideo();
         },
         onStateChange: function(event){
-            if (event.data === 0 && options.loop) event.target.playVideo();
+            console.log(event.data)
+            switch(event.data){
+              case -1: 
+                OKEvents.utils.isFunction(options.unstarted) && options.unstarted();
+                break;
+              case 0: 
+                OKEvents.utils.isFunction(options.onFinished) && options.onFinished();
+                options.loop && event.target.playVideo();
+                break;
+              case 1: 
+                OKEvents.utils.isFunction(options.onPlay) && options.onPlay();
+                break;
+            case 2: 
+                OKEvents.utils.isFunction(options.onPause) && options.onPause();
+                break;
+            case 3: 
+                OKEvents.utils.isFunction(options.buffering) && options.buffering();
+                break;
+            case 5: 
+                OKEvents.utils.isFunction(options.cued) && options.cued();
+                break;
+            default:
+                throw "OKVideo: received invalid data from YT player."
+            }
         },
         error: function(event){
             throw event;
@@ -207,5 +230,15 @@ OKEvents = {
         onPlay: function(){
             player.api('api_setVolume', options.volume);
         }
-    }
+    },
+    utils: {
+        isFunction: function(func){
+            if (typeof func === 'function'){
+                return true;
+            } else {
+                if (func === 1) func = true;
+                throw "OKVideo: " + func + " must be a function."
+            }
+        }
+    }    
 };
