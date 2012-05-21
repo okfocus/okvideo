@@ -35,7 +35,7 @@ OKVideo accepts a number of options. The below will embed a high definition vide
 $(function(){
   $.okvideo({ 
       source: '[:url]',
-      volume: 5,
+      volume: 50,
       hd: true,
       onFinished: function(){ 
           console.log('finished video!')
