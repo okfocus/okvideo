@@ -4,7 +4,7 @@ OKVideo is a jQuery plugin that allows for YouTube or Vimeo videos to be used as
 
 OKVideo uses the new YouTube IFrame API which does not require any Flash objects to be present on your website. This means that mobile devices will play video served by OKVideo. Content from Vimeo is served in a similar manner, although sometimes their videos will still be served in Flash.
 
-Tested and working in Safari 5.1+, Chrome, Firefox 3.6+, IE 8+. 
+Tested and working in Safari 5.1+, Chrome, Firefox 3.6+, IE 8+, Mobile Safari, Chrome for iOS.
 
 ## Usage
 
@@ -13,7 +13,7 @@ After including jQuery and the OKVideo plugin, instantiate OKVideo like so:
 ``` js
 
 $(function(){
-  $.okvideo({ source: '[:id]' }) // [:id] refers to a YouTube or Vimeo ID
+  $.okvideo({ video: '[:id]' }) // [:id] refers to a YouTube or Vimeo ID
 }
 
 ```
@@ -23,7 +23,21 @@ OKVideo conveniently will accept and parse full urls from YouTube or Vimeo:
 ``` js
 
 $(function(){
-  $.okvideo({ source: '[:url]' }) // [:url] refers to a YouTube or Vimeo URL
+  $.okvideo({ video: '[:url]' }) // [:url] refers to a YouTube or Vimeo URL
+}
+
+```
+
+Want a YouTube playlist? I got u.
+
+``` js
+
+$(function(){
+  $.okvideo({ playlist: {
+                list: '[:id]', // a YT playlist id
+                suggestedQuality: '[:quality]' 
+              }
+           });
 }
 
 ```
@@ -67,66 +81,109 @@ OKVideo gives you access to all of the YouTube player events. You can listen for
       <th>option</th>
 	  <th>description</th>
 	  <th>default</th>
-	</tr>
+      <th>type</th>
+    </tr>
     <tr>
-     <td>source</td>
+     <td>video</td>
 	   <td>an id or url from vimeo or youtube</td>
-	   <td>null (required)</td>
-	</tr>
+	   <td>null</td>
+       <td>string</td>
+     </tr>
     <tr>
       <td>disablekeyControl</td>
 	   <td>enable or disable key control (youtube videos only)</td>
 	   <td>true</td>
-	</tr>
+       <td>boolaen</td>
+    </tr>
     <tr>
       <td>captions</td>
       <td>enable or disable captions (youtube videos only)</td>
       <td>false</td>
+      <td>boolean</td>
 	</tr>
     <tr>
       <td>loop</td>
   	  <td>loop the video</td>
       <td>true</td>
-	</tr>
+      <td>boolean</td>
+   </tr>
     <tr>
       <td>high def</td>
   	  <td>control hd playback (youtube videos only)</td>
 	  <td>false</td>
+      <td>boolean</td>
 	</tr>
     <tr>
       <td>volume</td>
-  	  <td>control the volume with an integer from 0 - 100</td>
+  	  <td>control the volume (from 0 to 100)</td>
 	  <td>0</td>
+      <td>number</td>
 	</tr>
     <tr>
       <td>onFinished</td>
-  	  <td>listen for the "finished" event (must be a function)</td>
+  	  <td>listen for the "finished" event</td>
 	  <td>null</td>
-	</tr>
+      <td>function</td>
+    </tr>
     <tr>
       <td>unstarted</td>
-  	  <td>listen for the "unstarted" event (must be a function)</td>
+  	  <td>listen for the "unstarted" event</td>
 	  <td>null</td>
+      <td>function</td>      
 	</tr>
     <tr>
       <td>onPlay</td>
-  	  <td>listen for the "play" event (must be a function)</td>
+  	  <td>listen for the "play" event</td>
 	  <td>null</td>
+      <td>function</td>
 	</tr>
     <tr>
       <td>onPause</td>
-  	  <td>listen for the "pause" event (must be a function)</td>
+  	  <td>listen for the "pause" event</td>
 	  <td>null</td>
+      <td>function</td>      
 	</tr>
     <tr>
       <td>buffering</td>
-  	  <td>listen for the "buffering" event (must be a function)</td>
+  	  <td>listen for the "buffering" event</td>
 	  <td>null</td>
+      <td>function</td>      
 	</tr>
     <tr>
       <td>cued</td>
-  	  <td>listen for the "cued" event (must be a function)</td>
+  	  <td>listen for the "cued" event</td>
 	  <td>null</td>
+      <td>function</td>      
+	</tr>
+    <tr>
+      <td>Playlist</td>
+  	  <td></td>
+	  <td></td>
+      <td></td>      
+	</tr>
+    <tr>
+      <td>playlist.list</td>
+  	  <td>an id of a YouTube playlist</td>
+	  <td>null</td>
+      <td>string</td>
+	</tr>
+    <tr>
+      <td>playlists.index</td>
+  	  <td>which video the playlist begins with</td>
+	  <td>0</td>
+      <td>number</td>
+	</tr>
+    <tr>
+      <td>playlists.startSeconds</td>
+  	  <td>how many seconds into the first video to begin with</td>
+	  <td>0</td>
+      <td>number</td>
+	</tr>
+    <tr>
+      <td>playlists.suggestedQuality</td>
+  	  <td>the resolution of the video</td>
+	  <td>"default"</td>
+      <td>string (small, medium, large, hd720, hd1080, highres, default)</td>
 	</tr>
 </tbody>
 </table>
