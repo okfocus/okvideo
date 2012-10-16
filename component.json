@@ -1,0 +1,8 @@
+{
+  "name": "OKVideo",
+  "version": "2.0.0",
+  "main": "./src/okvideo.js",
+  "dependencies": {
+    "jquery": ">1.7.2"
+  }
+}
