@@ -1,5 +1,5 @@
 /*
- * OKVideo by OKFocus v2.1.0
+ * OKVideo by OKFocus v2.2.0
  * http://okfoc.us
  *
  * Copyright 2012, OKFocus
@@ -207,6 +207,7 @@ function onYouTubePlayerAPIReady() {
       'controls': 0,
       'enablejsapi': 1,
       'fs': 0,
+      'modestbranding': 1,
       'iv_load_policy': options.annotations,
       'loop': options.loop,
       'showinfo': 0,
