@@ -1,5 +1,5 @@
 /*
- * OKVideo by OKFocus v2.0.0
+ * OKVideo by OKFocus v2.1.0
  * http://okfoc.us
  *
  * Copyright 2012, OKFocus
@@ -17,7 +17,7 @@ var player, OKEvents, options;
 
     // if the option var was just a string, turn it into an object
     if (typeof options !== 'object') options = { 'video' : options };
-    
+
     var base = this;
 
     // kick things off
@@ -52,14 +52,15 @@ var player, OKEvents, options;
 
     // clean the options
     base.setOptions = function () {
-      // exchange 'true' for '1'
+      // exchange 'true' for '1' and 'false' for 3
       for (var key in this.options){
-        if (this.options[key] === true) this.options[key] = 1;
+        if (this.options[key] == true) this.options[key] = 1;
+        if (this.options[key] == false) this.options[key] = 3;
       }
 
       if (base.options.playlist.list === null) { 
         base.options.video = base.determineProvider();
-      } 
+      }
 
       // pass options to the window
       $(window).data('okoptions', base.options);
@@ -158,6 +159,7 @@ var player, OKEvents, options;
     onPlay: null,
     onPause: null,
     buffering: null,
+    annotations: true,
     cued: null
   };
 
@@ -205,7 +207,7 @@ function onYouTubePlayerAPIReady() {
       'controls': 0,
       'enablejsapi': 1,
       'fs': 0,
-      'iv_load_policy': 1,
+      'iv_load_policy': options.annotations,
       'loop': options.loop,
       'showinfo': 0,
       'rel': 0,
@@ -217,7 +219,7 @@ function onYouTubePlayerAPIReady() {
       'onStateChange': OKEvents.yt.onStateChange,
       'onError': OKEvents.yt.error
     }
-  }); 
+  });
 
 }
 

@@ -74,7 +74,7 @@ $(function(){
 OKVideo gives you access to all of the YouTube player events. You can listen for all of the available player states: unstarted, ended, playing, paused, buffering, and cued.  To listen for them simply pass OKVideo a function to the corresponding option noted below.
 
 ## Options
-
+cv
 <table>
   <tbody>
     <tr>
@@ -120,6 +120,12 @@ OKVideo gives you access to all of the YouTube player events. You can listen for
       <td>number</td>
 	</tr>
     <tr>
+      <td>annotations</td>
+  	  <td>toggle annotations</td>
+	  <td>true</td>
+      <td>boolean</td>
+	</tr>
+    <tr>
       <td>onFinished</td>
   	  <td>listen for the "finished" event</td>
 	  <td>null</td>
@@ -156,7 +162,7 @@ OKVideo gives you access to all of the YouTube player events. You can listen for
       <td>function</td>      
 	</tr>
     <tr>
-      <td>Playlist</td>
+      <td><strong>Playlist</strong></td>
   	  <td></td>
 	  <td></td>
       <td></td>      
