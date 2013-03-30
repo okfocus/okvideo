@@ -14,7 +14,7 @@ After including jQuery and the OKVideo plugin, instantiate OKVideo like so:
 
 $(function(){
   $.okvideo({ video: '[:id]' }) // [:id] refers to a YouTube or Vimeo ID
-}
+});
 
 ```
 
@@ -24,7 +24,7 @@ OKVideo conveniently will accept and parse full urls from YouTube or Vimeo:
 
 $(function(){
   $.okvideo({ video: '[:url]' }) // [:url] refers to a YouTube or Vimeo URL
-}
+});
 
 ```
 
@@ -38,7 +38,7 @@ $(function(){
                 suggestedQuality: '[:quality]' 
               }
            });
-}
+});
 
 ```
 
@@ -55,7 +55,7 @@ $(function(){
           console.log('finished video!')
       }
   });
-}
+});
 
 ```
 
@@ -65,7 +65,7 @@ You can also simply pass an id or url if no other options are desired:
 
 $(function(){
   $.okvideo('[:url]') // [:url] refers to a YouTube or Vimeo URL
-}
+});
 
 ```
 
