@@ -1,6 +1,6 @@
 {
   "name": "okvideo",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "title": "okvideo",
   "description": "A jQuery Plugin for fullscreen background videos from YouTube or Vimeo.",
   "homepage": "https://github.com/okfocus/okvideo",
@@ -16,10 +16,6 @@
     "url": "https://github.com/okfocus"
   },
   "maintainers": [{
-    "name": "Jonathan Vingiano",
-    "url": "https://github.com/jgv"
-  },
-  {
     "name": "Jules LaPlace",
     "url": "https://github.com/julescarbon"
   },

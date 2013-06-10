@@ -35,7 +35,7 @@ Want a YouTube playlist? I got u.
 $(function(){
   $.okvideo({ playlist: {
                 list: '[:id]', // a YT playlist id
-                suggestedQuality: '[:quality]' 
+                suggestedQuality: '[:quality]'
               }
            });
 });
@@ -47,11 +47,11 @@ OKVideo accepts a number of options. The below will embed a high definition vide
 ``` js
 
 $(function(){
-  $.okvideo({ 
+  $.okvideo({
       source: '[:url]',
       volume: 50,
       hd: true,
-      onFinished: function(){ 
+      onFinished: function(){
           console.log('finished video!')
       }
   });
@@ -74,7 +74,7 @@ $(function(){
 OKVideo gives you access to all of the YouTube player events. You can listen for all of the available player states: unstarted, ended, playing, paused, buffering, and cued.  To listen for them simply pass OKVideo a function to the corresponding option noted below.
 
 ## Options
-cv
+
 <table>
   <tbody>
     <tr>
@@ -135,7 +135,13 @@ cv
       <td>unstarted</td>
   	  <td>listen for the "unstarted" event</td>
 	  <td>null</td>
-      <td>function</td>      
+      <td>function</td>
+	  </tr>
+    <tr>
+      <td>onReady</td>
+  	  <td>listen for the "ready" event</td>
+	  <td>null</td>
+      <td>function</td>
 	</tr>
     <tr>
       <td>onPlay</td>
@@ -147,25 +153,25 @@ cv
       <td>onPause</td>
   	  <td>listen for the "pause" event</td>
 	  <td>null</td>
-      <td>function</td>      
+      <td>function</td>
 	</tr>
     <tr>
       <td>buffering</td>
   	  <td>listen for the "buffering" event</td>
 	  <td>null</td>
-      <td>function</td>      
+      <td>function</td>
 	</tr>
     <tr>
       <td>cued</td>
   	  <td>listen for the "cued" event</td>
 	  <td>null</td>
-      <td>function</td>      
+      <td>function</td>
 	</tr>
     <tr>
       <td><strong>Playlist</strong></td>
   	  <td></td>
 	  <td></td>
-      <td></td>      
+      <td></td>
 	</tr>
     <tr>
       <td>playlist.list</td>

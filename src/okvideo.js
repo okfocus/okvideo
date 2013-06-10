@@ -1,5 +1,5 @@
 /*
- * OKVideo by OKFocus v2.2.0
+ * OKVideo by OKFocus v2.2.1
  * http://okfoc.us
  *
  * Copyright 2012, OKFocus
@@ -159,6 +159,7 @@ var player, OKEvents, options;
     adproof: false,
     unstarted: null,
     onFinished: null,
+    onReady: null,
     onPlay: null,
     onPause: null,
     buffering: null,
@@ -187,6 +188,7 @@ function vimeoPlayerReady() {
   }, 2000);
 
   player.addEvent('ready', function () {
+    OKEvents.v.onReady();
     player.api('play');
     if (OKEvents.utils.isMobile()) {
       // mobile devices cannot listen for play event
@@ -238,6 +240,7 @@ OKEvents = {
       } else {
         event.target.playVideo();
       }
+      OKEvents.utils.isFunction(options.onReady) && options.onReady();
     },
     onStateChange: function(event){
       switch(event.data){
@@ -269,6 +272,9 @@ OKEvents = {
     }
   },
   v: {
+    onReady: function(){
+      OKEvents.utils.isFunction(options.onReady) && options.onReady();
+    },
     onPlay: function(){
       if (!OKEvents.utils.isMobile()) player.api('api_setVolume', options.volume);
       OKEvents.utils.isFunction(options.onPlay) && options.onPlay();
@@ -285,7 +291,6 @@ OKEvents = {
       if (typeof func === 'function'){
         return true;
       } else {
-        if (func === 1) func = true;
         return false;
       }
     },
