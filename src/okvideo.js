@@ -194,9 +194,9 @@ function vimeoPlayerReady() {
       // mobile devices cannot listen for play event
       OKEvents.v.onPlay();
     } else {
-      player.addEvent('play', OKEvents.v.onPlay());
-      player.addEvent('pause', OKEvents.v.onPause());
-      player.addEvent('finish', OKEvents.v.onFinish());
+      player.addEvent('play', OKEvents.v.onPlay);
+      player.addEvent('pause', OKEvents.v.onPause);
+      player.addEvent('finish', OKEvents.v.onFinish);
     }
   });
 }
