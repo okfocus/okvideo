@@ -203,7 +203,7 @@ function vimeoPlayerReady() {
 
 // youtube player ready
 function onYouTubePlayerAPIReady() {
-  options = $(window).data('okoptions');
+  options = jQuery(window).data('okoptions');
   player = new YT.Player('okplayer', {
     videoId: options.video ? options.video.id : null,
     playerVars: {
