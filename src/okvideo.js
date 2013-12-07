@@ -29,8 +29,9 @@ var player, OKEvents, options;
       if (base.options.video === null) base.options.video = base.options.source; 
 
       var target = base.options.target || $('body');
-      console.log(target);
       var position = target[0] == $('body')[0] ? 'fixed' : 'absolute';
+
+      target.css({position: 'relative'});
 
       if (OKEvents.utils.isMobile()) {
         target.append('<div id="okplayer" style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:-999;height:100%;width:100%;"></div>');
