@@ -1,8 +1,8 @@
 /*
- * OKVideo by OKFocus v2.2.1
+ * OKVideo by OKFocus v2.2.2
  * http://okfoc.us
  *
- * Copyright 2012, OKFocus
+ * Copyright 2013, OKFocus
  * Licensed under the MIT license.
  *
  */
@@ -26,7 +26,7 @@ var player, OKEvents, options;
       base.options = $.extend({}, $.okvideo.options, options);
 
       // support older versions of okvideo
-      if (base.options.video === null) base.options.video = base.options.source; 
+      if (base.options.video === null) base.options.video = base.options.source;
 
       var target = base.options.target || $('body');
       var position = target[0] == $('body')[0] ? 'fixed' : 'absolute';
@@ -46,7 +46,7 @@ var player, OKEvents, options;
       base.setOptions();
 
 
-      if (base.options.playlist.list === null) { 
+      if (base.options.playlist.list === null) {
         if (base.options.video.provider === 'youtube') {
           base.loadYouTubeAPI();
         } else if (base.options.video.provider === 'vimeo') {
@@ -66,7 +66,7 @@ var player, OKEvents, options;
         if (this.options[key] == false) this.options[key] = 3;
       }
 
-      if (base.options.playlist.list === null) { 
+      if (base.options.playlist.list === null) {
         base.options.video = base.determineProvider();
       }
 
@@ -75,7 +75,7 @@ var player, OKEvents, options;
     };
 
     // load the youtube api
-    base.loadYouTubeAPI = function (callback) {      
+    base.loadYouTubeAPI = function (callback) {
       base.insertJS('http://www.youtube.com/player_api');
     };
 
