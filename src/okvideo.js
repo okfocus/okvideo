@@ -13,7 +13,7 @@ var player, OKEvents, options;
 
   "use strict";
 
-	var BLANK_GIF = "data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw%3D%3D";
+  var BLANK_GIF = "data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw%3D%3D";
   $.okvideo = function (options) {
 
     // if the option var was just a string, turn it into an object
@@ -28,12 +28,17 @@ var player, OKEvents, options;
       // support older versions of okvideo
       if (base.options.video === null) base.options.video = base.options.source; 
 
+      var target = base.options.target || $('body');
+      var position = target[0] == $('body')[0] ? 'fixed' : 'absolute';
+
+      target.css({position: 'relative'});
+
       if (OKEvents.utils.isMobile()) {
-        $('body').append('<div id="okplayer" style="position:fixed;left:0;top:0;overflow:hidden;z-index:-999;height:100%;width:100%;"></div>');
+        target.append('<div id="okplayer" style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:-999;height:100%;width:100%;"></div>');
       } else if (base.options.adproof) {
-        $('body').append('<div style="position:fixed;left:0;top:0;overflow:hidden;z-index:-998;height:100%;width:100%;" id="okplayer-mask"></div><div id="okplayer" style="position:fixed;left:0;top:0;overflow:hidden;z-index:-999;height:110%;width:110%;"></div>');
+        target.append('<div style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:-998;height:100%;width:100%;" id="okplayer-mask"></div><div id="okplayer" style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:-999;height:110%;width:110%;"></div>');
       } else {
-        $('body').append('<div style="position:fixed;left:0;top:0;overflow:hidden;z-index:-998;height:100%;width:100%;" id="okplayer-mask"></div><div id="okplayer" style="position:fixed;left:0;top:0;overflow:hidden;z-index:-999;height:100%;width:100%;"></div>');
+        target.append('<div style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:-998;height:100%;width:100%;" id="okplayer-mask"></div><div id="okplayer" style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:-999;height:100%;width:100%;"></div>');
       }
 
       $("#okplayer-mask").css("background-image", "url(" + BLANK_GIF + ")");
@@ -168,6 +173,7 @@ var player, OKEvents, options;
   };
 
   $.fn.okvideo = function (options) {
+    options.target = this;
     return this.each(function () {
       (new $.okvideo(options));
     });
