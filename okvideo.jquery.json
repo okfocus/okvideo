@@ -1,0 +1,34 @@
+{
+  "name": "okvideo",
+  "version": "2.2.1",
+  "title": "okvideo",
+  "description": "A jQuery Plugin for fullscreen background videos from YouTube or Vimeo.",
+  "homepage": "https://github.com/okfocus/okvideo",
+  "docs": "https://github.com/okfocus/okvideo",
+  "demo": "http://okfoc.us/okvideo",
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://raw.github.com/okfocus/okvideo/master/license"
+  }],
+  "keywords": ["video", "background", "fullscreen", "full-screen", "responsive", "fill", "container", "youtube", "vimeo", "okfocus"],
+  "author": {
+    "name": "OKFocus",
+    "url": "https://github.com/okfocus"
+  },
+  "maintainers": [{
+    "name": "Jules LaPlace",
+    "url": "https://github.com/julescarbon"
+  },
+  {
+    "name": "Ryder Ripps",
+    "url": "https://github.com/ryderr"
+  }],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/okfocus/okvideo.git"
+  },
+  "bugs": "https://github.com/okfocus/okvideo/issues",
+  "dependencies": {
+    "jquery": ">=1.4"
+  }
+}

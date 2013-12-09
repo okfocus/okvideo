@@ -12,7 +12,7 @@
 #
 src_files:
     - spec/javascripts/vendor/jquery.js
-    - src/*.js
+    - src/okvideo.js
 
 # stylesheets
 #

@@ -1,5 +1,5 @@
 /*
- * OKVideo by OKFocus v2.2.0
+ * OKVideo by OKFocus v2.2.1
  * http://okfoc.us
  *
  * Copyright 2012, OKFocus
@@ -159,6 +159,7 @@ var player, OKEvents, options;
     adproof: false,
     unstarted: null,
     onFinished: null,
+    onReady: null,
     onPlay: null,
     onPause: null,
     buffering: null,
@@ -182,17 +183,20 @@ function vimeoPlayerReady() {
   player = $f(iframe);
 
   // hide player until Vimeo hides controls...
-  window.setTimeout($('#okplayer').css('visibility', 'visible'), 2000);
+  window.setTimeout(function(){
+    $('#okplayer').css('visibility', 'visible');
+  }, 2000);
 
   player.addEvent('ready', function () {
+    OKEvents.v.onReady();
     player.api('play');
     if (OKEvents.utils.isMobile()) {
       // mobile devices cannot listen for play event
       OKEvents.v.onPlay();
     } else {
-      player.addEvent('play', OKEvents.v.onPlay());
-      player.addEvent('pause', OKEvents.v.onPause());
-      player.addEvent('finish', OKEvents.v.onFinish());
+      player.addEvent('play', OKEvents.v.onPlay);
+      player.addEvent('pause', OKEvents.v.onPause);
+      player.addEvent('finish', OKEvents.v.onFinish);
     }
   });
 }
@@ -236,6 +240,7 @@ OKEvents = {
       } else {
         event.target.playVideo();
       }
+      OKEvents.utils.isFunction(options.onReady) && options.onReady();
     },
     onStateChange: function(event){
       switch(event.data){
@@ -267,15 +272,18 @@ OKEvents = {
     }
   },
   v: {
+    onReady: function(){
+      OKEvents.utils.isFunction(options.onReady) && options.onReady();
+    },
     onPlay: function(){
       if (!OKEvents.utils.isMobile()) player.api('api_setVolume', options.volume);
       OKEvents.utils.isFunction(options.onPlay) && options.onPlay();
     },
     onPause: function(){
-      OKEvents.utils.isFunction(options.onPlay) && options.onPause();
+      OKEvents.utils.isFunction(options.onPause) && options.onPause();
     },
     onFinish: function(){
-      OKEvents.utils.isFunction(options.onPlay) && options.onFinish();
+      OKEvents.utils.isFunction(options.onFinish) && options.onFinish();
     }
   },
   utils: {
@@ -283,7 +291,6 @@ OKEvents = {
       if (typeof func === 'function'){
         return true;
       } else {
-        if (func === 1) func = true;
         return false;
       }
     },

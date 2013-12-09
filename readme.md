@@ -4,4 +4,3 @@ OKVideo is a jQuery plugin that allows for YouTube or Vimeo videos to be used as
 
 For full documentation, please see the readme in the master branch.
 
-

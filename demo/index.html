@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+  <title>OKVideo</title>
+  <meta charset='utf-8'>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js'></script>
+  <script src='../src/okvideo.js'></script>
+  <script type="text/javascript">
+    $(function(){
+        $.okvideo({ source: '9bZkp7q19f0', 
+                    volume: 0, 
+                    loop: true,
+                    hd:true, 
+                    adproof: true,
+                    annotations: false,
+                    onFinished: function() { console.log('finished') },
+                    unstarted: function() { console.log('unstarted') },
+                    onReady: function() { console.log('onready') },
+                    onPlay: function() { console.log('onplay') },
+                    onPause: function() { console.log('pause') },
+                    buffering: function() { console.log('buffering') },
+                    cued: function() { console.log('cued') },
+                 });
+    });
+  </script>
+  <style type="text/css">
+    body {
+      margin: 20px;
+    }
+    #container {
+		background: rgba(255, 255, 255, 0.3);
+		padding: 10px;
+		width:610px;
+		font-family:helvetica;
+		color: white;
+		font-size: 14px;
+	}
+    a{color:white;}
+	a:visited{color:white;}
+    h1 {
+      font-size: 72px;
+      line-height: 12px;
+      margin-left: 20px;
+      font-weight: bold;
+      font-style: italic;
+      display: inline-block;
+    }
+
+    pre {
+      border: 1px solid #ddd;
+      background: rgb(238,238,238);
+      background: rgba(238,238,238,0.5);
+      font-size: 12px;
+      padding: 5px 0 5px 10px;
+      display: inline-block;
+	  width: 600px;
+    }
+    pre#license {
+      width: auto;
+      margin: 0;
+      padding: 10px;
+    }
+    pre#methods {
+      width: auto;
+      padding: 10px;
+    }
+	th {
+	text-align:left;
+	}
+    pre a {
+      color: #00f;
+    }
+    p {
+      width: 100%;
+    }
+    header img {margin-top:10px;max-width:500px;height:50px;}
+    h2{text-transform:uppercase;font-size:15px;letter-spacing:6px;margin-bottom:20px;margin-top:-10px;font-style:italic;font-family: Comic Sans MS, cursive;font-weight:100;-webkit-transform: rotate(-1deg);-moz-transform: rotate(-1deg); }
+  
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="header">
+      <a href="http://okfoc.us"><header>
+          <img src="spookylogo.png">
+        </header></a>
+      <hr>
+    </div>
+    <ul id="sidebar">
+    </ul>
+    <div id="content">
+      <h2>OKFocus Video</h2>
+      <p>
+        OKFocus video is a JQuery plugin that turns videos on YouTube or Vimeo into beautiful full-screen backgrounds, like the one on this page from <a href="http://www.youtube.com/watch?v=xdzAKHuYGoU"target="blank">Gatekeeper</a> + <a href="http://thunderhorsevideo.com"target="blank">Thunder Horse Video</a>.
+      </p>
+
+      <p>
+        Using OKVideo is stupid simple. Just add <a href="https://github.com/okfocus/okvideo/zipball/master">the script</a> and use the following code :
+      </p>
+      <pre>
+        $(function(){
+          $.okvideo({ source: 'YOUR AWESOME YOUTUBE OR VIMEO LINK HERE' }) 
+        });
+      </pre>
+
+      <div id="example1">
+      </div>
+      <p>
+        Additional params you can pass are as follow :
+      </p>
+      <pre>
+        <table>
+          <tbody>
+            <tr>
+              <th>option</th>
+	            <th>description</th>
+	            <th>default</th>
+	          </tr>
+            <tr>
+              <td>source</td>
+	            <td>an id or url from vimeo or youtube</td>
+	            <td>null (required)</td>
+	          </tr>
+            <tr>
+              <td>disablekeyControl</td>
+	            <td>enable or disable key control (youtube videos only)</td>
+	            <td>true</td>
+	          </tr>
+            <tr>
+              <td>captions</td>
+              <td>enable or disable captions (youtube videos only)</td>
+              <td>false</td>
+	          </tr>
+            <tr>
+              <td>loop</td>
+  	          <td>loop the video</td>
+              <td>true</td>
+	          </tr>
+            <tr>
+              <td>high def</td>
+  	          <td>control hd playback (youtube videos only)</td>
+	            <td>false</td>
+	          </tr>
+            <tr>
+              <td>volume</td>
+  	          <td>control the volume with an integer from 0 - 100</td>
+	            <td>0</td>
+	          </tr>
+            <tr>
+              <td>adproof</td>
+  	          <td>scale the youtube player larger than the browser<br/>to obscure youtube ads</td>
+	            <td>false</td>
+	          </tr>
+          </tbody>
+        </table>
+      </pre>
+      'Checkout' the <a href="https://github.com/okfocus/okvideo">GitHub repo</a> for this, also checkout our <a href="http://okfoc.us/#labs">other awesome codez!
+    </div>
+</body>
+</html>
