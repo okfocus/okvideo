@@ -1,0 +1,8 @@
+*~
+.DS_Store
+*.orig
+.sass-cache/
+.#*
+*.swp
+node_modules
+okvideo.concat.js
