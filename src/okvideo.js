@@ -127,8 +127,8 @@ var player, OKEvents, options;
         return { "provider" : "youtube", "id" : a.href.slice(a.href.indexOf('v=') + 2).toString() };
       } else if (/vimeo.com/.test(base.options.video)) {
         return { "provider" : "vimeo", "id" : a.href.split('/')[3].toString() };
-      } else if (/[A-Za-z0-9_]+/.test(base.options.video)) {
-        var id = new String(base.options.video.match(/[A-Za-z0-9_]+/));
+      } else if (/[-_A-Za-z0-9]+/.test(base.options.video)) {
+        var id = new String(base.options.video.match(/[-_A-Za-z0-9]+/));
         if (id.length == 11) {
           return { "provider" : "youtube", "id" : id.toString() };
         } else {
