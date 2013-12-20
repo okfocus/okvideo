@@ -1,5 +1,5 @@
 /*
- * OKVideo by OKFocus v2.2.2
+ * OKVideo by OKFocus v2.3.0
  * http://okfoc.us
  *
  * Copyright 2013, OKFocus
