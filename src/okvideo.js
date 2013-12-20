@@ -62,8 +62,8 @@ var player, OKEvents, options;
     base.setOptions = function () {
       // exchange 'true' for '1' and 'false' for 3
       for (var key in this.options){
-        if (this.options[key] == true) this.options[key] = 1;
-        if (this.options[key] == false) this.options[key] = 3;
+        if (this.options[key] === true) this.options[key] = 1;
+        if (this.options[key] === false) this.options[key] = 3;
       }
 
       if (base.options.playlist.list === null) {
