@@ -66,6 +66,10 @@ var player, OKEvents, options;
         if (this.options[key] === false) this.options[key] = 3;
       }
 
+      if (base.options.autoplay === 3) {
+        base.options.autoplay = 0;
+      }
+
       if (base.options.playlist.list === null) {
         base.options.video = base.determineProvider();
       }
@@ -86,7 +90,7 @@ var player, OKEvents, options;
     // load the vimeo api by replacing the div with an iframe and loading js
     base.loadVimeoAPI = function() {
       $('#okplayer').replaceWith(function() {
-        return '<iframe src="http://player.vimeo.com/video/' + base.options.video.id + '?api=1&js_api=1&title=0&byline=0&portrait=0&playbar=0&loop=' + base.options.loop + '&autoplay=1&player_id=okplayer" frameborder="0" style="' + $(this).attr('style') + 'visibility:hidden;background-color:black;" id="' + $(this).attr('id') + '"></iframe>';
+        return '<iframe src="http://player.vimeo.com/video/' + base.options.video.id + '?api=1&js_api=1&title=0&byline=0&portrait=0&playbar=0&loop=' + base.options.loop + '&autoplay=' + base.options.autoplay + '&player_id=okplayer" frameborder="0" style="' + $(this).attr('style') + 'visibility:hidden;background-color:black;" id="' + $(this).attr('id') + '"></iframe>';
       });
 
       base.insertJS('http://a.vimeocdn.com/js/froogaloop2.min.js', function(){
@@ -127,8 +131,8 @@ var player, OKEvents, options;
         return { "provider" : "youtube", "id" : a.href.slice(a.href.indexOf('v=') + 2).toString() };
       } else if (/vimeo.com/.test(base.options.video)) {
         return { "provider" : "vimeo", "id" : a.href.split('/')[3].toString() };
-      } else if (/[A-Za-z0-9_]+/.test(base.options.video)) {
-        var id = new String(base.options.video.match(/[A-Za-z0-9_]+/));
+      } else if (/[-A-Za-z0-9_]+/.test(base.options.video)) {
+        var id = new String(base.options.video.match(/[-A-Za-z0-9_]+/));
         if (id.length == 11) {
           return { "provider" : "youtube", "id" : id.toString() };
         } else {
@@ -168,6 +172,7 @@ var player, OKEvents, options;
     onPlay: null,
     onPause: null,
     buffering: null,
+    autoplay: true,
     annotations: true,
     cued: null
   };
@@ -214,7 +219,7 @@ function onYouTubePlayerAPIReady() {
     videoId: options.video ? options.video.id : null,
     playerVars: {
       'autohide': 1,
-      'autoplay': 1,
+      'autoplay': options.autoplay,
       'disablekb': options.keyControls,
       'cc_load_policy': options.captions,
       'controls': 0,
