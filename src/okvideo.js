@@ -28,22 +28,31 @@ var player, OKEvents, options;
       // support older versions of okvideo
       if (base.options.video === null) base.options.video = base.options.source;
 
+      base.setOptions();
+
       var target = base.options.target || $('body');
       var position = target[0] == $('body')[0] ? 'fixed' : 'absolute';
 
       target.css({position: 'relative'});
 
+      var zIndex = base.options.controls === 3 ? -999 : "auto";
+      var mask = '<div id="okplayer-mask" style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:-998;height:100%;width:100%;"></div>';
+
       if (OKEvents.utils.isMobile()) {
-        target.append('<div id="okplayer" style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:-999;height:100%;width:100%;"></div>');
+        target.append('<div id="okplayer" style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:' + zIndex + ';height:100%;width:100%;"></div>');
       } else if (base.options.adproof) {
-        target.append('<div style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:-998;height:100%;width:100%;" id="okplayer-mask"></div><div id="okplayer" style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:-999;height:110%;width:110%;"></div>');
+        if (base.options.controls === 3) {
+          target.append(mask)
+        }
+        target.append('<div id="okplayer" style="position:' + position + ';left:-10%;top:-10%;overflow:hidden;z-index:' + zIndex + ';height:120%;width:120%;"></div>');
       } else {
-        target.append('<div style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:-998;height:100%;width:100%;" id="okplayer-mask"></div><div id="okplayer" style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:-999;height:100%;width:100%;"></div>');
+        if (base.options.controls === 3) {
+          target.append(mask)
+        }
+        target.append('<div id="okplayer" style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:' + zIndex + ';height:100%;width:100%;"></div>');
       }
 
       $("#okplayer-mask").css("background-image", "url(" + BLANK_GIF + ")");
-
-      base.setOptions();
 
 
       if (base.options.playlist.list === null) {
@@ -66,10 +75,6 @@ var player, OKEvents, options;
         if (this.options[key] === false) this.options[key] = 3;
       }
 
-      if (base.options.autoplay === 3) {
-        base.options.autoplay = 0;
-      }
-
       if (base.options.playlist.list === null) {
         base.options.video = base.determineProvider();
       }
@@ -90,7 +95,7 @@ var player, OKEvents, options;
     // load the vimeo api by replacing the div with an iframe and loading js
     base.loadVimeoAPI = function() {
       $('#okplayer').replaceWith(function() {
-        return '<iframe src="http://player.vimeo.com/video/' + base.options.video.id + '?api=1&js_api=1&title=0&byline=0&portrait=0&playbar=0&loop=' + base.options.loop + '&autoplay=' + base.options.autoplay + '&player_id=okplayer" frameborder="0" style="' + $(this).attr('style') + 'visibility:hidden;background-color:black;" id="' + $(this).attr('id') + '"></iframe>';
+        return '<iframe src="http://player.vimeo.com/video/' + base.options.video.id + '?api=1&js_api=1&title=0&byline=0&portrait=0&playbar=0&loop=' + base.options.loop + '&autoplay=' + (base.options.autoplay === 1 ? 1 : 0) + '&player_id=okplayer" frameborder="0" style="' + $(this).attr('style') + 'visibility:hidden;background-color:black;" id="' + $(this).attr('id') + '"></iframe>';
       });
 
       base.insertJS('http://a.vimeocdn.com/js/froogaloop2.min.js', function(){
@@ -172,6 +177,7 @@ var player, OKEvents, options;
     onPlay: null,
     onPause: null,
     buffering: null,
+    controls: false,
     autoplay: true,
     annotations: true,
     cued: null
@@ -219,10 +225,10 @@ function onYouTubePlayerAPIReady() {
     videoId: options.video ? options.video.id : null,
     playerVars: {
       'autohide': 1,
-      'autoplay': options.autoplay,
+      'autoplay': 0, //options.autoplay,
       'disablekb': options.keyControls,
       'cc_load_policy': options.captions,
-      'controls': 0,
+      'controls': options.controls,
       'enablejsapi': 1,
       'fs': 0,
       'modestbranding': 1,
@@ -246,10 +252,12 @@ OKEvents = {
   yt: {
     ready: function(event){
       event.target.setVolume(options.volume);
-      if (options.playlist.list) {
-        player.loadPlaylist(options.playlist.list, options.playlist.index, options.playlist.startSeconds, options.playlist.suggestedQuality);
-      } else {
-        event.target.playVideo();
+      if (options.autoplay === 1) {
+        if (options.playlist.list) {
+          player.loadPlaylist(options.playlist.list, options.playlist.index, options.playlist.startSeconds, options.playlist.suggestedQuality);
+        } else {
+          event.target.playVideo();
+        }
       }
       OKEvents.utils.isFunction(options.onReady) && options.onReady();
     },

@@ -126,6 +126,18 @@ OKVideo gives you access to all of the YouTube player events. You can listen for
       <td>boolean</td>
 	</tr>
     <tr>
+      <td>autoplay</td>
+  	  <td>autoplay the video</td>
+	  <td>true</td>
+      <td>boolean</td>
+	</tr>
+    <tr>
+      <td>controls</td>
+  	  <td>show player controls (youtube only)</td>
+	  <td>false</td>
+      <td>boolean</td>
+	</tr>
+    <tr>
       <td>onFinished</td>
   	  <td>listen for the "finished" event</td>
 	  <td>null</td>
