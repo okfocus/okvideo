@@ -1,8 +1,8 @@
 /*
- * OKVideo by OKFocus v2.3.0
+ * OKVideo by OKFocus v2.3.1
  * http://okfoc.us
  *
- * Copyright 2013, OKFocus
+ * Copyright 2014, OKFocus
  * Licensed under the MIT license.
  *
  */
