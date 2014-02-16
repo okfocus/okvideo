@@ -1,8 +1,8 @@
 /*
- * OKVideo by OKFocus v2.3.0
+ * OKVideo by OKFocus v2.3.1
  * http://okfoc.us
  *
- * Copyright 2013, OKFocus
+ * Copyright 2014, OKFocus
  * Licensed under the MIT license.
  *
  */
@@ -40,7 +40,7 @@ var player, OKEvents, options;
 
       if (OKEvents.utils.isMobile()) {
         target.append('<div id="okplayer" style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:' + zIndex + ';height:100%;width:100%;"></div>');
-      } else if (base.options.adproof) {
+      } else if (base.options.adproof === 1) {
         if (base.options.controls === 3) {
           target.append(mask)
         }
