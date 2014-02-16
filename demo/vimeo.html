@@ -1,16 +1,16 @@
 <!doctype html>
 <html>
 <head>
-  <title>OKVideo</title>
+  <title>OKVideo Vimeo Test</title>
   <meta charset='utf-8'>
   <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js'></script>
   <script src='../src/okvideo.js'></script>
   <script type="text/javascript">
     $(function(){
-        $.okvideo({ source: '14663047', 
-                    volume: 0, 
+        $.okvideo({ source: '14663047',
+                    volume: 0,
                     loop: true,
-                    hd:true, 
+                    hd:true,
                     adproof: true,
                     annotations: false,
                     onFinished: function() { console.log('finished') },
@@ -89,9 +89,10 @@
     <ul id="sidebar">
     </ul>
     <div id="content">
-      <h2>OKFocus Video</h2>
+      <h2>OKVideo Vimeo Test</h2>
+
       <p>
-        OKFocus video is a JQuery plugin that turns videos on YouTube or Vimeo into beautiful full-screen backgrounds, like the one on this page from <a href="http://www.youtube.com/watch?v=xdzAKHuYGoU"target="blank">Gatekeeper</a> + <a href="http://thunderhorsevideo.com"target="blank">Thunder Horse Video</a>.
+        This page tests the Vimeo embed, all events, and muting.
       </p>
 
       <p>
@@ -99,61 +100,10 @@
       </p>
       <pre>
         $(function(){
-          $.okvideo({ source: 'YOUR AWESOME YOUTUBE OR VIMEO LINK HERE' }) 
+          $.okvideo({ source: 'YOUR AWESOME YOUTUBE OR VIMEO LINK HERE' })
         });
       </pre>
 
-      <div id="example1">
-      </div>
-      <p>
-        Additional params you can pass are as follow :
-      </p>
-      <pre>
-        <table>
-          <tbody>
-            <tr>
-              <th>option</th>
-	            <th>description</th>
-	            <th>default</th>
-	          </tr>
-            <tr>
-              <td>source</td>
-	            <td>an id or url from vimeo or youtube</td>
-	            <td>null (required)</td>
-	          </tr>
-            <tr>
-              <td>disablekeyControl</td>
-	            <td>enable or disable key control (youtube videos only)</td>
-	            <td>true</td>
-	          </tr>
-            <tr>
-              <td>captions</td>
-              <td>enable or disable captions (youtube videos only)</td>
-              <td>false</td>
-	          </tr>
-            <tr>
-              <td>loop</td>
-  	          <td>loop the video</td>
-              <td>true</td>
-	          </tr>
-            <tr>
-              <td>high def</td>
-  	          <td>control hd playback (youtube videos only)</td>
-	            <td>false</td>
-	          </tr>
-            <tr>
-              <td>volume</td>
-  	          <td>control the volume with an integer from 0 - 100</td>
-	            <td>0</td>
-	          </tr>
-            <tr>
-              <td>adproof</td>
-  	          <td>scale the youtube player larger than the browser<br/>to obscure youtube ads</td>
-	            <td>false</td>
-	          </tr>
-          </tbody>
-        </table>
-      </pre>
       'Checkout' the <a href="https://github.com/okfocus/okvideo">GitHub repo</a> for this, also checkout our <a href="http://okfoc.us/#labs">other awesome codez!
     </div>
 </body>
