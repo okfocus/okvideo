@@ -85,7 +85,7 @@ var player, OKEvents, options;
 
     // load the youtube api
     base.loadYouTubeAPI = function (callback) {
-      base.insertJS('http://www.youtube.com/player_api');
+      base.insertJS('//www.youtube.com/player_api');
     };
 
     base.loadYouTubePlaylist = function() {
@@ -95,12 +95,13 @@ var player, OKEvents, options;
     // load the vimeo api by replacing the div with an iframe and loading js
     base.loadVimeoAPI = function() {
       $('#okplayer').replaceWith(function() {
-        return '<iframe src="http://player.vimeo.com/video/' + base.options.video.id + '?api=1&title=0&byline=0&portrait=0&playbar=0&loop=' + base.options.loop + '&autoplay=' + (base.options.autoplay === 1 ? 1 : 0) + '&player_id=okplayer" frameborder="0" style="' + $(this).attr('style') + 'visibility:hidden;background-color:black;" id="' + $(this).attr('id') + '"></iframe>';
+        return '<iframe src="//player.vimeo.com/video/' + base.options.video.id + '?api=1&title=0&byline=0&portrait=0&playbar=0&loop=' + base.options.loop + '&autoplay=' + (base.options.autoplay === 1 ? 1 : 0) + '&player_id=okplayer" frameborder="0" style="' + $(this).attr('style') + 'visibility:hidden;background-color:black;" id="' + $(this).attr('id') + '"></iframe>';
       });
 
 			// if necessary, debug with the most recent version of froogaloop
     	// base.insertJS('https://rawgithub.com/vimeo/player-api/master/javascript/froogaloop.js', function(){
-    	base.insertJS('http://a.vimeocdn.com/js/froogaloop2.min.js', function(){
+    	// base.insertJS('http://a.vimeocdn.com/js/froogaloop2.min.js', function(){
+    	base.insertJS('//origin-assets.vimeo.com/js/froogaloop2.min.js', function(){
         vimeoPlayerReady();
       });
     };
@@ -237,6 +238,7 @@ function onYouTubePlayerAPIReady() {
       'enablejsapi': 1,
       'fs': 0,
       'modestbranding': 1,
+      'origin': window.location.origin || (window.location.protocol + '//' + window.location.hostname),
       'iv_load_policy': options.annotations,
       'loop': options.loop,
       'showinfo': 0,
