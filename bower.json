@@ -5,6 +5,7 @@
 	"authors": [
 		"OKFocus"
 	],
+	"main": "./src/okvideo.js",
 	"description": "OKFocus, Internet Legends",
 	"private": true,
 	"dependencies": {
