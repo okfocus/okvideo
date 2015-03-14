@@ -183,7 +183,8 @@ var player, OKEvents, options;
     controls: false,
     autoplay: true,
     annotations: true,
-    cued: null
+    cued: null,
+    startAt: 0
   };
 
   $.fn.okvideo = function (options) {
@@ -244,7 +245,8 @@ function onYouTubePlayerAPIReady() {
       'showinfo': 0,
       'rel': 0,
       'wmode': 'opaque',
-      'hd': options.hd
+      'hd': options.hd,
+      'start':options.startAt
     },
     events: {
       'onReady': OKEvents.yt.ready,
