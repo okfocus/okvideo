@@ -239,6 +239,7 @@ function onYouTubePlayerAPIReady() {
       'fs': 0,
       'modestbranding': 1,
       'origin': window.location.origin || (window.location.protocol + '//' + window.location.hostname),
+      'playsinline': 1,
       'iv_load_policy': options.annotations,
       'loop': options.loop,
       'showinfo': 0,
