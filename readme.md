@@ -10,63 +10,50 @@ Tested and working in Safari 5.1+, Chrome, Firefox 3.6+, IE 8+, Mobile Safari, C
 
 After including jQuery and the OKVideo plugin, instantiate OKVideo like so:
 
-``` js
-
-$(function(){
-  $.okvideo({ video: '[:id]' }) // [:id] refers to a YouTube or Vimeo ID
-});
-
+```js
+$.okvideo({ video: '<id>' }) // '<id>' refers to a YouTube or Vimeo ID, like '248816836'
 ```
 
 OKVideo conveniently will accept and parse full urls from YouTube or Vimeo:
 
-``` js
-
-$(function(){
-  $.okvideo({ video: '[:url]' }) // [:url] refers to a YouTube or Vimeo URL
-});
-
+```js
+$.okvideo({ video: '<url>' }) // '<url>' refers to a YouTube or Vimeo URL, like 'https://vimeo.com/248816836'
 ```
 
 Want a YouTube playlist? I got u.
 
-``` js
-
-$(function(){
-  $.okvideo({ playlist: {
-                list: '[:id]', // a YT playlist id
-                suggestedQuality: '[:quality]'
-              }
-           });
+```js
+$.okvideo({
+	playlist: {
+		list: '<id>', // a YouTube playlist id, like 'PL4B2CBC4A35E0E224'
+		suggestedQuality: '<quality>'
+	}
 });
-
 ```
 
 OKVideo accepts a number of options. The below will embed a high definition video from YouTube with the audio set to 50% and log something to the console once the video has completed:
 
-``` js
-
-$(function(){
-  $.okvideo({
-      source: '[:url]',
-      volume: 50,
-      hd: true,
-      onFinished: function(){
-          console.log('finished video!')
-      }
-  });
+```js
+$.okvideo({
+	source: 'https://vimeo.com/248816836',
+	volume: 50,
+	hd: true,
+	onFinished: function(){
+	  console.log('finished video!')
+	}
 });
-
 ```
 
 You can also simply pass an id or url if no other options are desired:
 
-``` js
+```js
+$.okvideo('https://vimeo.com/248816836')
+```
 
-$(function(){
-  $.okvideo('[:url]') // [:url] refers to a YouTube or Vimeo URL
-});
+Or you can attach video background to element you want:
 
+```js
+$('.background-video').okvideo('https://vimeo.com/248816836')
 ```
 
 ## YouTube API Access
